@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌱 PlantVentory Clone
+A modern plant inventory management application built with Next.js 15.
+<div align="center">
+  <img src="https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js 15" />
+  <img src="https://img.shields.io/badge/Better_Auth-4F46E5?style=for-the-badge&logo=auth0&logoColor=white" alt="Better Auth" />
+  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Plants-00C853?style=for-the-badge&logo=leaf&logoColor=white" alt="Plants" />
+</div>
 
-## Getting Started
+## ✨ Features
 
-First, run the development server:
+- 🌿 **Plant Database**: Add, edit, and manage your plant collection
+- 🏷️ **Categorization**: Organize plants by type, location, and care requirements
+- 📱 **Mobile Responsive**: Manage your plants on any device
+- 🔍 **Advanced Search**: Find plants by name, species, or care needs
+- 📸 **Photo Gallery**: Store photo for each plant
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠️ Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Frontend:** Next.js 15, React, TypeScript, Tailwind CSS, Shadcn/ui, Tailark, TweakCN 
+- **Backend:** Better Auth, Drizzle ORM, Neon PostgreSQL
+- **Tools:** uploadthing, Google Cloud, GitHub Developer Portal, Vscode, Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚢 Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Deploy easily on [Vercel](https://next-js-plantventory.vercel.app/) with one click.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+<div align="center">
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 🎬 Source / Reference
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### 📺 YouTube Tutorial
+**[Build & Deploy Full Stack Next.js & React CRUD App with Auth | ShadCN UI, PostgreSQL, Prisma](https://www.youtube.com/watch?v=DupS46tLPn0)**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<div align="center">
+  <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" />
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
+</div>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**🙏 Special thanks to the creator for the amazing educational content!**
+
+</div>
