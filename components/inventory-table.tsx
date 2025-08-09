@@ -89,7 +89,7 @@ export default function InventoryTable({ plants }: InventoryTableProps) {
 
                 <TableCell className="text-right">
                   <div
-                    className="flex justify-end space-x-4"
+                    className="flex gap-4 justify-self-end"
                     onClick={(e) => e.stopPropagation()} // ป้องกันการกดปุ่มแล้วเปิด plant
                   >
                     <UpdatePlantButton plant={plant} />

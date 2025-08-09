@@ -78,7 +78,7 @@ export const plants = pgTable("plants", {
   category: text("category").notNull(),
   price: integer("price").notNull(),
   stock: integer("stock").notNull(),
-  image: text("image"),
+  imageUrl: text("imageUrl"),
   userId: text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),

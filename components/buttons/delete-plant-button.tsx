@@ -78,6 +78,7 @@ export function DeletePlantButton({ plantId }: { plantId: string }) {
             variant="outline"
             onClick={() => setIsOpen(false)}
             disabled={isLoading}
+            className="sm:w-20"
           >
             Cancel
           </Button>
@@ -85,6 +86,7 @@ export function DeletePlantButton({ plantId }: { plantId: string }) {
             variant="destructive"
             onClick={handleDelete}
             disabled={isLoading}
+            className="sm:w-20"
           >
             {isLoading ? <Loader2 className="size-4 animate-spin" /> : "Delete"}
           </Button>

@@ -24,6 +24,7 @@ import { Textarea } from "../ui/textarea";
 import { Plant } from "@/db/schema";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
+import ImageUpload from "../image-upload";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -31,7 +32,7 @@ const formSchema = z.object({
   description: z.string().optional(),
   stock: z.number().min(1, "Stock is required"),
   price: z.number().min(1, "Price is required"),
-  image: z.instanceof(File).optional(),
+  imageUrl: z.string().optional(),
 });
 
 export function PlantForm({
@@ -43,6 +44,10 @@ export function PlantForm({
 }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string>(
+    plant?.imageUrl || ""
+  );
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,7 +58,7 @@ export function PlantForm({
       description: plant?.description || "",
       stock: plant?.stock || 0,
       price: plant?.price || 0,
-      // image: plant.image || new File([], ""),
+      imageUrl: plant?.imageUrl || "",
     },
   });
 
@@ -70,13 +75,9 @@ export function PlantForm({
         return;
       }
 
-      // แปลง File เป็น base64 string หรือ URL (ตัวอย่างนี้ใช้ชื่อไฟล์)
-      const imageData =
-        values.image && values.image.size > 0 ? values.image.name : undefined;
-
       const PlantData = {
         ...values,
-        image: imageData, // แปลง File เป็น string
+        imageUrl: uploadedImageUrl,
         userId,
       };
 
@@ -96,6 +97,19 @@ export function PlantForm({
       setIsLoading(false);
     }
   }
+
+  const handleImageUpload = (url: string) => {
+    setUploadedImageUrl(url);
+    form.setValue("imageUrl", url);
+    setIsUploading(false);
+    toast.success("Image uploaded successfully");
+  };
+
+  const handleRemoveImage = () => {
+    setUploadedImageUrl("");
+    form.setValue("imageUrl", "");
+    setIsUploading(false);
+  };
 
   return (
     <Form {...form}>
@@ -147,6 +161,7 @@ export function PlantForm({
               </FormItem>
             )}
           />
+
           <div className="grid grid-cols-2 gap-3">
             <FormField
               control={form.control}
@@ -185,19 +200,19 @@ export function PlantForm({
               )}
             />
           </div>
+
           <FormField
             control={form.control}
-            name="image"
+            name="imageUrl"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Image</FormLabel>
                 <FormControl>
-                  <Input
-                    accept=".jpg, .jpeg, .png, .svg, .gif, .mp4"
-                    type="file"
-                    onChange={(e) =>
-                      field.onChange(e.target.files ? e.target.files[0] : null)
-                    }
+                  <ImageUpload
+                    uploadedImageUrl={uploadedImageUrl}
+                    handleImageUpload={handleImageUpload}
+                    handleRemoveImage={handleRemoveImage}
+                    setIsUploading={setIsUploading}
                   />
                 </FormControl>
                 <FormMessage />
@@ -205,7 +220,12 @@ export function PlantForm({
             )}
           />
         </div>
-        <Button type="submit" className="w-full" disabled={isLoading}>
+
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={isLoading || isUploading}
+        >
           {isLoading ? (
             <Loader2 className="size-4 animate-spin" />
           ) : plant?.id ? (

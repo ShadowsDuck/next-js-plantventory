@@ -20,7 +20,7 @@ export default function PlantCard({ plant }: PlantCardProps) {
             <div className="w-[400px] h-[350px] relative overflow-hidden rounded-lg bg-gray-100">
               <Image
                 src={
-                  plant.plant?.image ||
+                  plant.plant?.imageUrl ||
                   "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
                 }
                 alt={plant.plant?.name || "Plant Image"}

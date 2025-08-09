@@ -25,6 +25,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "developers.elementor.com",
       },
+      {
+        protocol: "https",
+        hostname: "dbk52j1umm.ufs.sh",
+      },
     ],
   },
 };
