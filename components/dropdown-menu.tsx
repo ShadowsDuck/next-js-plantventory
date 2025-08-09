@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { User } from "lucide-react";
 import Image from "next/image";
-import { SignOutButton } from "./sign-out-button";
+import { SignOutButton } from "./buttons/sign-out-button";
 
 export default function DropdownMenuWithIcon({ session }: any) {
   return (

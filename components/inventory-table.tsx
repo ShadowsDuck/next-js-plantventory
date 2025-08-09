@@ -10,12 +10,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Input } from "./ui/input";
-import { Search } from "lucide-react";
+import { Delete, Search } from "lucide-react";
 import { Combobox } from "./ui/combobox";
 import { useState } from "react";
 import { Plant } from "@/db/schema";
 import { useRouter } from "next/navigation";
-import { CreatePlantButton } from "./create-plant-button";
+import { UpdatePlantButton } from "./buttons/update-plant-button";
+import { CreatePlantButton } from "./buttons/create-plant-button";
+import { DeletePlantButton } from "./buttons/delete-plant-button";
 
 interface InventoryTableProps {
   plants: Plant[];
@@ -53,6 +55,7 @@ export default function InventoryTable({ plants }: InventoryTableProps) {
         <Combobox
           value={selectedCategory}
           onChange={(value) => setSelectedCategory(value)}
+          className="min-w-1/6"
         />
         <div className="flex justify-end">
           <CreatePlantButton />
@@ -82,12 +85,15 @@ export default function InventoryTable({ plants }: InventoryTableProps) {
                 <TableCell>{plant.name}</TableCell>
                 <TableCell>{plant.category}</TableCell>
                 <TableCell>{plant.price}</TableCell>
-                <TableCell className="font-bold">{plant.stock}</TableCell>
+                <TableCell>{plant.stock}</TableCell>
 
                 <TableCell className="text-right">
-                  <div className="flex justify-end space-x-4">
-                    <h1>Edit</h1>
-                    <h1>Delete</h1>
+                  <div
+                    className="flex justify-end space-x-4"
+                    onClick={(e) => e.stopPropagation()} // ป้องกันการกดปุ่มแล้วเปิด plant
+                  >
+                    <UpdatePlantButton plant={plant} />
+                    <DeletePlantButton plantId={plant.id} />
                   </div>
                 </TableCell>
               </TableRow>

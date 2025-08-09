@@ -34,9 +34,10 @@ interface ComboboxProps {
   value: string;
   onChange: (value: string) => void;
   error?: boolean;
+  className?: string;
 }
 
-export function Combobox({ value, onChange, error }: ComboboxProps) {
+export function Combobox({ value, onChange, error, className }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
 
   // หา label ที่ตรงกับ value ปัจจุบัน
@@ -49,7 +50,11 @@ export function Combobox({ value, onChange, error }: ComboboxProps) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={cn("justify-between", error && "!border-[#ff5b5b]")}
+          className={cn(
+            "justify-between",
+            error && "!border-[#ff5b5b]",
+            className && className
+          )}
           style={error ? { borderColor: "rgb(255, 91, 91)" } : undefined}
         >
           {selectedCategory ? selectedCategory.label : "Select category..."}

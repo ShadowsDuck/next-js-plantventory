@@ -2,7 +2,7 @@
 
 import { db } from "@/db/drizzle";
 import { InsertPlant, plants } from "@/db/schema";
-import { eq, sql, and } from "drizzle-orm";
+import { eq, sql, and, desc } from "drizzle-orm";
 import { getUserId } from "./user";
 
 export const getPlants = async (searchTerm?: string) => {
@@ -19,6 +19,7 @@ export const getPlants = async (searchTerm?: string) => {
           sql`${plants.name} ILIKE ${"%" + searchTerm + "%"}`,
           eq(plants.userId, userId)
         ),
+        orderBy: [desc(plants.updatedAt)],
       });
 
       return { success: true, userPlants: filteredPlants };
@@ -26,6 +27,7 @@ export const getPlants = async (searchTerm?: string) => {
 
     const userPlants = await db.query.plants.findMany({
       where: eq(plants.userId, userId),
+      orderBy: [desc(plants.updatedAt)],
     });
 
     return { success: true, userPlants };
@@ -81,28 +83,33 @@ export const createPlant = async (values: InsertPlant) => {
   }
 };
 
-// export const updateNotebook = async (id: string, values: InsertNotebook) => {
-//   try {
-//     await db.update(notebooks).set(values).where(eq(notebooks.id, id));
-//     return { success: true, message: "Notebook updated successfully" };
-//   } catch (error) {
-//     const e = error as Error;
-//     return {
-//       success: false,
-//       message: e.message || "Failed to update notebook",
-//     };
-//   }
-// };
+export const updatePlant = async (id: string, values: InsertPlant) => {
+  try {
+    const dataPlant = {
+      ...values,
+      updatedAt: new Date(),
+    };
 
-// export const deleteNotebook = async (id: string) => {
-//   try {
-//     await db.delete(notebooks).where(eq(notebooks.id, id));
-//     return { success: true, message: "Notebook deleted successfully" };
-//   } catch (error) {
-//     const e = error as Error;
-//     return {
-//       success: false,
-//       message: e.message || "Failed to delete notebook",
-//     };
-//   }
-// };
+    await db.update(plants).set(dataPlant).where(eq(plants.id, id));
+    return { success: true, message: "Plant updated successfully" };
+  } catch (error) {
+    const e = error as Error;
+    return {
+      success: false,
+      message: e.message || "Failed to update plant",
+    };
+  }
+};
+
+export const deletePlant = async (id: string) => {
+  try {
+    await db.delete(plants).where(eq(plants.id, id));
+    return { success: true, message: "Plant deleted successfully" };
+  } catch (error) {
+    const e = error as Error;
+    return {
+      success: false,
+      message: e.message || "Failed to delete plant",
+    };
+  }
+};

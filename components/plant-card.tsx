@@ -2,7 +2,7 @@ import { getPlantById } from "@/server/plant";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
-import BackButton from "./back-button";
+import BackButton from "./buttons/back-button";
 
 type Plant = Awaited<ReturnType<typeof getPlantById>>;
 
