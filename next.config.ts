@@ -17,6 +17,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "github.com",
       },
+      {
+        protocol: "https",
+        hostname: "sparrowhawknativeplants.com",
+      },
+      {
+        protocol: "https",
+        hostname: "developers.elementor.com",
+      },
     ],
   },
 };

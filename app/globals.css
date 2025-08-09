@@ -179,6 +179,6 @@
   }
 }
 
-.nav-button {
-  @apply text-sm font-medium;
+.page-wrapper {
+  @apply max-w-7xl mx-auto pt-24;
 }

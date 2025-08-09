@@ -26,7 +26,7 @@ export default function Navbar({ session }: any) {
         data-state={menuState && "active"}
         className="fixed z-20 w-full border-b bg-white backdrop-blur dark:bg-zinc-950/50 lg:dark:bg-transparent"
       >
-        <div className="m-auto max-w-5xl px-6">
+        <div className="m-auto max-w-7xl px-6 py-2 h-[66px] lg:px-4 lg:py-0">
           <div className="flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             <div className="flex w-full justify-between lg:w-auto">
               <Link

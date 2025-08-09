@@ -1,4 +1,13 @@
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { relations, sql } from "drizzle-orm";
+import {
+  pgTable,
+  text,
+  timestamp,
+  boolean,
+  uuid,
+  numeric,
+  integer,
+} from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -60,4 +69,62 @@ export const verification = pgTable("verification", {
   ),
 });
 
-export const schema = { user, session, account, verification };
+export const plants = pgTable("plants", {
+  id: text("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  description: text("description"),
+  category: text("category").notNull(),
+  price: integer("price").notNull(),
+  stock: integer("stock").notNull(),
+  image: text("image"),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at")
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+  updatedAt: timestamp("updated_at")
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+});
+
+// Relations
+export const userRelations = relations(user, ({ many }) => ({
+  plants: many(plants),
+}));
+
+export const plantRelations = relations(plants, ({ one }) => ({
+  user: one(user, {
+    fields: [plants.userId],
+    references: [user.id],
+  }),
+}));
+
+export type User = typeof user.$inferSelect;
+export type Plant = typeof plants.$inferSelect;
+export type InsertPlant = typeof plants.$inferInsert;
+
+// // Base types
+// export type BaseUser = typeof user.$inferSelect;
+// export type BasePlant = typeof plants.$inferSelect;
+// export type InsertPlant = typeof plants.$inferInsert;
+
+// // Types with relations
+// export type User = BaseUser & {
+//   plants: BasePlant[];
+// };
+// export type Plant = BasePlant & {
+//   user: BaseUser;
+// };
+
+export const schema = {
+  user,
+  session,
+  account,
+  verification,
+  plants,
+  userRelations,
+  plantRelations,
+};
