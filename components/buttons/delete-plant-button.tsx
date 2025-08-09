@@ -14,9 +14,10 @@ import {
 import { Loader2, OctagonAlert, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Plant } from "@/db/schema";
-import { toast } from "sonner";
+
 import { useRouter } from "next/navigation";
 import { deletePlant } from "@/server/plant";
+import toast from "react-hot-toast";
 
 export function DeletePlantButton({ plantId }: { plantId: string }) {
   const router = useRouter();
